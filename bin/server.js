@@ -1,17 +1,13 @@
-// const colors = require("colors")
-const mongoose = require("mongoose")
-const path = require("path")
-const express = require("express")
-const app = express();
+const mongoose = require('mongoose')
+const path = require('path')
 
-require("dotenv").config({ path: path.join(__dirname, "../.env") })
+require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
-// const app = require('../app')
-const PORT = process.env.PORT || 3000;
-const { DB_HOST } = process.env
-async function start() {
-  try {
-    await mongoose
+const app = require('../app')
+
+const { DB_HOST, PORT = 3000 } = process.env
+
+mongoose
   .connect(DB_HOST, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Database connection successful')
@@ -22,11 +18,6 @@ async function start() {
   })
   .catch(err => {
     console.log('Cannot create connection to DB')
-    console.log(err)
+    console.log(err.message)
     process.exit(1)
   })
-  } catch (error) {
-    console.log(error)
-  }
-}
-start();
