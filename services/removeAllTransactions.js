@@ -1,4 +1,4 @@
-const Transaction = require("../models/transactions");
+const { Transaction } = require('../models')
 
 async function deleteAllTransactions() {
   await Transaction.deleteMany({})

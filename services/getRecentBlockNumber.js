@@ -1,7 +1,7 @@
-const axios = require('axios');
-require('dotenv').config();
+const axios = require('axios')
+require('dotenv').config()
 
-const { API_KEY } = process.env;
+const { API_KEY } = process.env
 const BASE_URL = 'https://api.etherscan.io'
 axios.defaults.baseURL = `${BASE_URL}`
 

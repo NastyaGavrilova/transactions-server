@@ -1,5 +1,5 @@
-const ctrlWrapper = require("./ctrlWrapper")
-const validation = require("./validation").default
+const ctrlWrapper = require('./ctrlWrapper')
+const validation = require('./validation').default
 
 module.exports = {
   ctrlWrapper,
