@@ -5,7 +5,9 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
 const app = require('../app')
 
-const { DB_HOST, PORT = 3001 } = process.env
+const PORT = process.env.PORT || 8080
+
+const { DB_HOST } = process.env
 
 mongoose
   .connect(DB_HOST, { useNewUrlParser: true, useUnifiedTopology: true })
