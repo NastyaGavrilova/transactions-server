@@ -6,13 +6,15 @@ const getBySearchParams = async (req, res) => {
   let { filter, searchQuery } = req.query
 
   switch (filter) {
-    case 'address':
+    case 'recipientsAddress':
       filter = 'recipientsAddress'
       break
+
     case 'transactionId':
       filter = 'transactionId'
       break
-
+    case 'senderAddress':
+      filter = 'senderAddress'
     default:
       break
   }

@@ -20,7 +20,7 @@ const getRecentBlock = async recentBlockNumber => {
   const count = await Transaction.count()
   console.log('Total transactions count in collection is', count)
   if (count === 0) {
-    //Loading first Transactions to db
+    
     await getFirstTransactions(recentBlockNumber)
     console.log('Collection Transactions is filled with transactions.')
   }

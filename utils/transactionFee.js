@@ -1,5 +1,5 @@
-const converter = require("ether-converter");
-const hexToDec = require("./hexToDec");
+const converter = require('ether-converter');
+const hexToDec = require('./hexToDec');
 
 function transactionFeeCalculator(gas, gasPrice) {
   const weiGasLimit = hexToDec(gas);

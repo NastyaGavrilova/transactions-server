@@ -1,4 +1,4 @@
-const decToHex = (dec) => {
-    return dec.toString(16);
+const decToHex = dec => {
+  return dec.toString(16)
 }
-module.exports = decToHex;
+module.exports = decToHex
