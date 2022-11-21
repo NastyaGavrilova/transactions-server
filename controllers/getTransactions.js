@@ -1,47 +1,35 @@
 const { Transaction } = require('../models')
-const { getRecentBlockNumber } = require('../services')
-const hexToDec = require('../utils/hexToDec')
+const { getLastBlock } = require('../services/getLastBlock')
 
 const getTransactions = async (req, res) => {
-  const { currentPage, pageItemsLimit } = req.query
-  const skip = (currentPage - 1) * pageItemsLimit
-  const transactionsCount = await Transaction.count()
-  const count = transactionsCount - 1000
-  const transactions = await Transaction.aggregate([
-    {
-      $match: {},
-    },
-    {
-      $sort: {
-        createdAt: -1,
-      },
-    },
-    {
-      $skip: skip,
-    },
-    {
-      $limit: Number(pageItemsLimit),
-    },
-  ]).sort({ createdAt: -1 })
+  const currentBlockNumber = await getLastBlock()
+  const { searchQuery, filter, page = 1, limit = 14 } = req.query
 
-  if (!transactions) {
-    const error = new Error(`Transactions not found.`)
-    error.status = 404
-    throw error
+  const options = {
+    page,
+    limit,
   }
-  const recentBlockNumber = await getRecentBlockNumber()
 
-  const result = transactions.map(item => {
-    item.blockConfirmations = hexToDec(recentBlockNumber) - item.blockNumber
-    return item
-  })
+  const result = await Transaction.paginate(
+    { [filter]: searchQuery },
+    options,
+    await function (err, result) {
+      if (err) {
+        console.error(err)
+      } else {
+        return result
+      }
+    },
+  )
 
   res.status(200).json({
-    status: 'success',
     code: 200,
+    status: 'success',
     data: {
-      result,
-      count,
+      transactions: result.docs,
+      totalPageCount: result.totalPages,
+      page: result.page,
+      currentBlockNumber,
     },
   })
 }

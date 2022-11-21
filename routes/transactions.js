@@ -1,28 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { ctrlWrapper } = require('../middlewares')
-const {
-  validateGetTransactions,
-  validateGetTransactionsBySearchParams,
-  validateGetTransactionsByBlockNumber,
-} = require('../middlewares/validation')
 
-const {
-  getTransactions,
-  getBySearchParams,
-  getBlockByNumber,
-} = require('../controllers')
+const { getTransactions } = require('../controllers')
+const { validateGetTransactions } = require('../middlewares/validation')
 
-router.get('/', validateGetTransactions, ctrlWrapper(getTransactions))
-router.get(
-  '/search',
-  validateGetTransactionsBySearchParams,
-  ctrlWrapper(getBySearchParams),
-)
-router.get(
-  '/searchByBlockNumber',
-  validateGetTransactionsByBlockNumber,
-  ctrlWrapper(getBlockByNumber),
-)
-
+router.get('/', validateGetTransactions, getTransactions)
 module.exports = router

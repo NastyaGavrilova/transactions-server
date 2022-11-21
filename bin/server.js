@@ -4,9 +4,8 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
 const app = require('../app')
-
-const PORT = process.env.PORT || 8080
-
+const { getTransactionsRecursion } = require('../services')
+const PORT = process.env.PORT || 8082
 const { DB_HOST } = process.env
 
 mongoose
@@ -16,6 +15,8 @@ mongoose
 
     app.listen(PORT, () => {
       console.log(`Server running. Use our API on port: ${PORT}`)
+      // Start load DB with getTransactionsRecursion func
+      getTransactionsRecursion()
     })
   })
   .catch(err => {

@@ -1,10 +1,12 @@
 const { Schema, model, SchemaTypes } = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const transactionSchema = Schema(
   {
     blockNumber: {
       type: Number,
       required: [true, 'Block number of transaction is unknown'],
+      index: -1,
     },
     transactionId: {
       type: String,
@@ -45,5 +47,8 @@ const transactionSchema = Schema(
   },
 )
 
+transactionSchema.plugin(mongoosePaginate)
+
 const Transaction = model('transaction', transactionSchema)
+Transaction.paginate().then({})
 module.exports = Transaction

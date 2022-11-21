@@ -1,15 +1,13 @@
-const getRecentBlock = require('./getRecentBlock')
-const getRecentBlockNumber = require('./getRecentBlockNumber')
-const getRecentBlockRecursion = require('./getRecentBlockRecursion')
-const getFirstTransactions = require('./getFirtTransactions')
+const { getLastBlock } = require('./getLastBlock')
+const { getBlockByNumber } = require('./getBlockByNumber')
+const getTransactionsRecursion = require('./getTransactionsRecursion')
+const getTransactions = require('./getTransactions')
 const removeAllTransactions = require('./removeAllTransactions')
-const removeOneBlock = require('./removeOneBlock')
 
 module.exports = {
-  getRecentBlock,
-  getRecentBlockNumber,
-  getRecentBlockRecursion,
-  getFirstTransactions,
+  getLastBlock,
+  getBlockByNumber,
+  getTransactionsRecursion,
+  getTransactions,
   removeAllTransactions,
-  removeOneBlock,
 }

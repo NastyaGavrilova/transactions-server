@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const logger = require('morgan')
-const { getRecentBlockRecursion, removeAllTransactions } = require('./services')
+const { removeAllTransactions } = require('./services')
 const transactionsRouter = require('./routes/transactions')
 require('dotenv').config()
 
@@ -15,8 +15,6 @@ app.use(express.json())
 // Use to delete all transactions in collection
 
 // removeAllTransactions()
-// Start load DB with getRecentBlockRecursion func
-getRecentBlockRecursion()
 
 // Routes
 app.use('/api/transactions', transactionsRouter)
